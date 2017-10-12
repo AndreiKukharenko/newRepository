@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FilmsWebApi.DAL.Infrastructure;
+using FilmsWebApi.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace FilmsWebApi.DAL.Infrastructure
 {
     public interface IUoW
     {
-        IFilmsRepository FilmsRepository { get; }
+        IBaseRepository<Film> FilmsRepository { get; }
 
         void SaveChanges();
     }

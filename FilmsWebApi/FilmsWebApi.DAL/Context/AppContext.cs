@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FilmsWebApi.DAL.Context
 {
-    public class AppContext : IdentityDbContext<AppUser>, IAppContext
+    public class AppContext : IdentityDbContext<AppUser>
     {
         public AppContext() : base ("FilmsWebApi") //connectionString
         {

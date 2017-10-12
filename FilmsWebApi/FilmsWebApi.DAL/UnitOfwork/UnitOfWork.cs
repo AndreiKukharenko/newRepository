@@ -1,32 +1,27 @@
 ﻿using FilmsWebApi.DAL.Context;
 using FilmsWebApi.DAL.Infrastructure;
+using FilmsWebApi.DAL.Models;
 using FilmsWebApi.DAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FilmsWebApi.DAL.UnitOfwork
 {
     public class UnitOfWork : IUoW
     {
         private AppContext _appContext; // how to use IoC here?
-        private IFilmsRepository _filmsRepo;
+        private IBaseRepository<Film> _filmsRepo;
 
         public UnitOfWork(AppContext appContext)
         {
             _appContext = appContext;
         }
 
-        public IFilmsRepository FilmsRepository
+        public IBaseRepository<Film> FilmsRepository
         {
             get
             {
                 if (this._filmsRepo == null)
                 {
-                    this._filmsRepo = new FilmsRepository(_appContext);
+                    this._filmsRepo = new BaseRepository<Film>(_appContext);
                 }
                 return _filmsRepo;
             }
