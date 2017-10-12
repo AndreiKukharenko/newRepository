@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace FilmsWebApi.DAL.Infrastructure
 {
-    public interface IBaseRepository<TEntity>
+    public interface IGenericRepository<TEntity>
     {
         ICollection<TEntity> GetAll();
 

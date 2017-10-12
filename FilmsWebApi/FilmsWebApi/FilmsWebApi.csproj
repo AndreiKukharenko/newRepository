@@ -328,6 +328,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FilmsWebApi.BLL\FilmsWebApi.BLL.csproj">
+      <Project>{c2b4ca39-4130-4773-8bf6-37a623ae4829}</Project>
+      <Name>FilmsWebApi.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FilmsWebApi.DAL\FilmsWebApi.DAL.csproj">
       <Project>{6F97330A-F4C8-40BD-8EF5-5ADC67727630}</Project>
       <Name>FilmsWebApi.DAL</Name>

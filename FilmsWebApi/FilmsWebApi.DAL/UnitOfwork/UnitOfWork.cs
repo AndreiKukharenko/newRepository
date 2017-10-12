@@ -8,20 +8,20 @@ namespace FilmsWebApi.DAL.UnitOfwork
     public class UnitOfWork : IUoW
     {
         private AppContext _appContext; // how to use IoC here?
-        private IBaseRepository<Film> _filmsRepo;
+        private IGenericRepository<Film> _filmsRepo;
 
         public UnitOfWork(AppContext appContext)
         {
             _appContext = appContext;
         }
 
-        public IBaseRepository<Film> FilmsRepository
+        public IGenericRepository<Film> FilmsRepository
         {
             get
             {
                 if (this._filmsRepo == null)
                 {
-                    this._filmsRepo = new BaseRepository<Film>(_appContext);
+                    this._filmsRepo = new GenericRepository<Film>(_appContext);
                 }
                 return _filmsRepo;
             }

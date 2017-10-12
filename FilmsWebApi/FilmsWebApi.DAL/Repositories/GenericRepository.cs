@@ -9,14 +9,14 @@ using FilmsWebApi.DAL.Models;
 
 namespace FilmsWebApi.DAL.Repositories
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : BaseEntity
     {
         private readonly AppContext _appContext;
 
         private readonly IDbSet<TEntity> _currentDbSet;
 
-        public BaseRepository(AppContext appContext)
+        public GenericRepository(AppContext appContext)
         {
             _appContext = appContext;
             _currentDbSet = appContext.Set<TEntity>();

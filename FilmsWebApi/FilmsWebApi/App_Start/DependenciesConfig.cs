@@ -1,10 +1,10 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
 using FilmsWebApi.DAL.Infrastructure;
 using FilmsWebApi.DAL.Repositories;
 using FilmsWebApi.DAL.Context;
 using FilmsWebApi.DAL.UnitOfwork;
+using FilmsWebApi.DAL.Models;
 
 namespace FilmsWebApi.App_Start
 {
@@ -19,8 +19,9 @@ namespace FilmsWebApi.App_Start
             // web abstractions like HttpContextBase;
             // Enable property injection in view pages. http://docs.autofac.org/en/latest/integration/mvc.html
 
-            builder.RegisterType<FilmsRepository>().As<IFilmsRepository>();
-            builder.RegisterType<AppContext>().As<IAppContext>();
+            // TODO: manage lifetime scope 
+
+            builder.RegisterType<GenericRepository<Film>>().As<IGenericRepository<Film>>();
             builder.RegisterType<UnitOfWork>().As<IUoW>();
         }
 
