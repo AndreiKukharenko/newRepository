@@ -24,7 +24,7 @@ namespace FilmsWebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer(new AppDataInitializer());
+            //Database.SetInitializer(new AppDataInitializer());
 
             // Set the dependency resolver to be Autofac.
             DependenciesConfig.RegisterDependencies();

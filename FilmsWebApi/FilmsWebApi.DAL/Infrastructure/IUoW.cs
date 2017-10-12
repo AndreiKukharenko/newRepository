@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace FilmsWebApi.DAL.Infrastructure
 {
-    public interface IUoW : IDisposable
+    public interface IUoW
     {
         IFilmsRepository FilmsRepository { get; }
+
+        void SaveChanges();
     }
 }

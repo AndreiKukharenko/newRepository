@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FilmsWebApi.DAL.UnitOfwork
 {
-    public class UnitOfWork :IUoW
+    public class UnitOfWork : IUoW
     {
         private AppContext _appContext; // how to use IoC here?
         private IFilmsRepository _filmsRepo;
@@ -31,25 +31,9 @@ namespace FilmsWebApi.DAL.UnitOfwork
                 return _filmsRepo;
             }
         }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
+        public void SaveChanges()
         {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _appContext.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            _appContext.SaveChanges();
         }
     }
 }

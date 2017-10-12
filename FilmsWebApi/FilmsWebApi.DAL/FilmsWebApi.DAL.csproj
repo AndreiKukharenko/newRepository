@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="Context\AppContext.cs" />
     <Compile Include="Context\AppDataInitializer.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Infrastructure\IAppContext.cs" />
     <Compile Include="Infrastructure\IFilmsRepository.cs" />
     <Compile Include="Infrastructure\IBaseRepository.cs" />

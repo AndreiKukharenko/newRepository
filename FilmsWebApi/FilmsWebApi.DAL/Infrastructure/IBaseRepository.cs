@@ -22,8 +22,6 @@ namespace FilmsWebApi.DAL.Infrastructure
         void Delete(int id);
 
         void Delete(TEntity entity);
-
-        void SaveChanges();
-
+        
     }
 }
