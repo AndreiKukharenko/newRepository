@@ -67,13 +67,11 @@ namespace FilmsWebApi.DAL.Repositories
                 _appContext.Entry(existingModel).CurrentValues.SetValues(newModel); // can be picked out in a separate method Update();
                 // views must contain all properties: see https://stackoverflow.com/questions/15336248/entity-framework-5-updating-a-record
             }
-            _appContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
             CurrentDbSet.Remove(GetById(id));
-            _appContext.SaveChanges();
         }
 
         public void Delete(TEntity entity)

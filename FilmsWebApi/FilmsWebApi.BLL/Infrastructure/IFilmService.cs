@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace FilmsWebApi.BLL.Infrastructure
 {
-    public interface IAppService
+    public interface IFilmService
     {
         IEnumerable<FilmDTO> GetAll();
 
         FilmDTO GetFilmById(int id);
 
-        bool AddFilm(FilmDTO filmDTO);
+        void AddFilm(FilmDTO filmDTO);
 
         IEnumerable<FilmDTO> SearchFilmsByTitle(string searchString);
     }

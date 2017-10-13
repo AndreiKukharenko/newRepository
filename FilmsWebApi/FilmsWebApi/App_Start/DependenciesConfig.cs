@@ -5,6 +5,8 @@ using FilmsWebApi.DAL.Repositories;
 using FilmsWebApi.DAL.Context;
 using FilmsWebApi.DAL.UnitOfwork;
 using FilmsWebApi.DAL.Models;
+using FilmsWebApi.BLL.Infrastructure;
+using FilmsWebApi.BLL.Services;
 
 namespace FilmsWebApi.App_Start
 {
@@ -23,6 +25,8 @@ namespace FilmsWebApi.App_Start
 
             builder.RegisterType<GenericRepository<Film>>().As<IGenericRepository<Film>>();
             builder.RegisterType<UnitOfWork>().As<IUoW>();
+            builder.RegisterType<FilmService>().As<IFilmService>();
+
         }
 
         public static ContainerBuilder Builder
