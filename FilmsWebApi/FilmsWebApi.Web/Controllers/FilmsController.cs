@@ -10,7 +10,7 @@ using FilmsWebApi.DAL.Models;
 using FilmsWebApi.BLL.Infrastructure;
 using FilmsWebApi.BLL.DTO;
 
-namespace FilmsWebApi.Controllers
+namespace FilmsWebApi.Web.Controllers
 {
     //[Authorize]
     public class FilmsController : ApiController

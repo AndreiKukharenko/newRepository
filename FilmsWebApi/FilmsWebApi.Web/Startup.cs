@@ -4,9 +4,7 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(FilmsWebApi.Web.Startup))]
-
-namespace FilmsWebApi
+namespace FilmsWebApi.Web
 {
     public partial class Startup
     {

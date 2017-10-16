@@ -8,7 +8,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using FilmsWebApi.Web.Models;
 
-namespace FilmsWebApi.Controllers
+namespace FilmsWebApi.Web.Controllers
 {
     //[Authorize]
     public class AccountController : ApiController

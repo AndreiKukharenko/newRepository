@@ -7,7 +7,7 @@ using FilmsWebApi.DAL.Models;
 using FilmsWebApi.BLL.Infrastructure;
 using FilmsWebApi.BLL.Services;
 
-namespace FilmsWebApi.App_Start
+namespace FilmsWebApi.Web.App_Start
 {
     public static class DependenciesConfig
     {

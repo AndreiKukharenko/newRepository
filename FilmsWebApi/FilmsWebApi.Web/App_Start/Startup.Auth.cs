@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using FilmsWebApi.Providers;
-using Microsoft.AspNet.WebApi.Owin;
+using FilmsWebApi.Web.Providers;
 
-namespace FilmsWebApi
+namespace FilmsWebApi.Web
 {
     public partial class Startup
     {
@@ -24,7 +19,7 @@ namespace FilmsWebApi
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new CustomOAuthProvider(PublicClientId),
+                Provider = new CustomOAuthProvider(),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 
@@ -32,7 +27,7 @@ namespace FilmsWebApi
                 AllowInsecureHttp = true
             };
 
-            app.UseOAuthBearerTokens(OAuthOptions);
+            //app.UseOAuthBearerTokens(OAuthOptions);
         }
     }
 }

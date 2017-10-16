@@ -8,12 +8,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace FilmsWebApi.Providers
+namespace FilmsWebApi.Web.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
 
-        public CustomOAuthProvider(string publicClientId)
+        public CustomOAuthProvider()
         {
         }
 
@@ -32,16 +32,30 @@ namespace FilmsWebApi.Providers
             var password = context.Password; 
 
             // validation
-            if (CredentialsValidator.ValidateCredentials(username, password))
+            if (!CredentialsValidator.ValidateCredentials(username, password))
             {
-                ClaimsIdentity identity = new ClaimsIdentity(); 
-                var ticket = new AuthenticationTicket(identity, null);
-                context.Validated(ticket);
+                context.SetError("username or password is incorrect");
+                return;
             }
 
+            ClaimsIdentity identity = new ClaimsIdentity(); 
+
+            // todo: set properties as second argument
+            var ticket = new AuthenticationTicket(identity, null);
+            context.Validated(ticket);
 
         }
 
+        /// <summary>
+        /// add properties (to the Dictionary) wich will be used for AuthenticationTicket
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        public static AuthenticationProperties AddAuthentificationProperties(string property)
+        {
+            throw new NotImplementedException();
+            return new AuthenticationProperties();
+        }
 
     }
 }
