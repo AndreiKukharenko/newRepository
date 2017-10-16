@@ -7,7 +7,7 @@ namespace FilmsWebApi.DAL.Context
 {
     public class AppContext : IdentityDbContext<AppUser>
     {
-        public AppContext() : base ("FilmsWebApi") //connectionString
+        public AppContext() : base ("Films") //connectionString
         {
             Database.SetInitializer(new AppDataInitializer());
         }

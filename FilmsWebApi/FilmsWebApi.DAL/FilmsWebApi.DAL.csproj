@@ -61,6 +61,11 @@
     <Compile Include="Context\AppDataInitializer.cs" />
     <Compile Include="Infrastructure\IGenericRepository.cs" />
     <Compile Include="Infrastructure\IUoW.cs" />
+    <Compile Include="Migrations\201710161101314_Init.cs" />
+    <Compile Include="Migrations\201710161101314_Init.Designer.cs">
+      <DependentUpon>201710161101314_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Film.cs" />
@@ -68,10 +73,14 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="UnitOfwork\UnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710161101314_Init.resx">
+      <DependentUpon>201710161101314_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

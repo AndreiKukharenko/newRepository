@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using FilmsWebApi.DAL.Models;
-
-namespace FilmsWebApi.DAL.Context
+namespace FilmsWebApi.DAL.Migrations
 {
+    using Models;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-    // TODO: delete 
-    public class AppDataInitializer: DropCreateDatabaseIfModelChanges<AppContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FilmsWebApi.DAL.Context.AppContext>
     {
-        protected override void Seed(AppContext context)
+        public Configuration()
         {
-            GetFilms().ForEach(e => context.Films.Add(e));
+            AutomaticMigrationsEnabled = false;
         }
 
-        private static List<Film> GetFilms()
+        protected override void Seed(FilmsWebApi.DAL.Context.AppContext context)
         {
-            return new List<Film>
-            {
-                new Film
+
+                context.Films.AddOrUpdate(
+                  new Film
                 {
-                    Id = 1,
+                Id = 1,
                     Title = "first film",
                     Description = "description"
                 },
@@ -36,8 +35,7 @@ namespace FilmsWebApi.DAL.Context
                     Title = "third film",
                     Description = "desc-n #3"
                 }
-
-            };
+            );
         }
     }
 }
