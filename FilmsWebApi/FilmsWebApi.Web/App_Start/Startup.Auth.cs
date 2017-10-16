@@ -19,7 +19,6 @@ namespace FilmsWebApi
 
         public void ConfigureAuth(IAppBuilder app)
         {
-
             // Configure the application for OAuth based flow
             PublicClientId = "self";
             OAuthOptions = new OAuthAuthorizationServerOptions

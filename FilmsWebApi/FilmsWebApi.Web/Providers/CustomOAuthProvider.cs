@@ -31,13 +31,15 @@ namespace FilmsWebApi.Providers
             var username = context.UserName;
             var password = context.Password; 
 
-            // validate 
+            // validation
             if (CredentialsValidator.ValidateCredentials(username, password))
+            {
+                ClaimsIdentity identity = new ClaimsIdentity(); 
+                var ticket = new AuthenticationTicket(identity, null);
+                context.Validated(ticket);
+            }
 
 
-            ClaimsIdentity identity = new ClaimsIdentity(); 
-            var ticket = new AuthenticationTicket(identity, null);
-            context.Validated(ticket);
         }
 
 
