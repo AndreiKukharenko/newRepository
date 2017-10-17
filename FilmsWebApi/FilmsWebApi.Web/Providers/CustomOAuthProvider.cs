@@ -1,30 +1,28 @@
-﻿using FilmsWebApi.Web.Validators;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using FilmsWebApi.Web.Validators;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 
 namespace FilmsWebApi.Web.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
-
         public CustomOAuthProvider()
         {
         }
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-           
             context.Validated();
             return Task.FromResult<object>(null);
         }
 
-        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
@@ -35,15 +33,17 @@ namespace FilmsWebApi.Web.Providers
             if (!CredentialsValidator.ValidateCredentials(username, password))
             {
                 context.SetError("username or password is incorrect");
-                return;
+                return Task.FromResult<object>(null);
             }
 
-            ClaimsIdentity identity = new ClaimsIdentity(); 
+            ClaimsIdentity identity = new ClaimsIdentity();
 
-            // todo: set properties as second argument
-            var ticket = new AuthenticationTicket(identity, null);
+            AuthenticationProperties authProperties = CreateAuthentificationProperties(username);
+            var ticket = new AuthenticationTicket(identity, authProperties);
             context.Validated(ticket);
+            // or: context.Validated(identity);
 
+            return Task.FromResult<object>(null);
         }
 
         /// <summary>
@@ -51,10 +51,13 @@ namespace FilmsWebApi.Web.Providers
         /// </summary>
         /// <param name="property"></param>
         /// <returns></returns>
-        public static AuthenticationProperties AddAuthentificationProperties(string property)
+        public static AuthenticationProperties CreateAuthentificationProperties(string userName)
         {
-            throw new NotImplementedException();
-            return new AuthenticationProperties();
+            Dictionary<string, string> data = new Dictionary<string, string>
+            {
+                { "userName", userName }
+            };
+            return new AuthenticationProperties(data);
         }
 
     }

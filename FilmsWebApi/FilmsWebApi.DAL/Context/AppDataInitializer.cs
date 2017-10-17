@@ -6,12 +6,12 @@ using FilmsWebApi.DAL.Models;
 namespace FilmsWebApi.DAL.Context
 {
 
-    // TODO: delete 
-    public class AppDataInitializer: DropCreateDatabaseIfModelChanges<AppContext>
+    public class AppDataInitializer: CreateDatabaseIfNotExists<AppContext>
     {
         protected override void Seed(AppContext context)
         {
             GetFilms().ForEach(e => context.Films.Add(e));
+            context.SaveChanges();
         }
 
         private static List<Film> GetFilms()

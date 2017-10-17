@@ -8,26 +8,34 @@ namespace FilmsWebApi.Web
 {
     public partial class Startup
     {
-        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+        private static OAuthAuthorizationServerOptions _OAuthOptions;
 
-        public static string PublicClientId { get; private set; }
-
-        public void ConfigureAuth(IAppBuilder app)
+        static Startup()
         {
             // Configure the application for OAuth based flow
-            PublicClientId = "self";
-            OAuthOptions = new OAuthAuthorizationServerOptions
+            _OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new CustomOAuthProvider(),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                
+
                 // In production mode set AllowInsecureHttp = false
                 AllowInsecureHttp = true
             };
+        }
+        public static OAuthAuthorizationServerOptions OAuthOptions
+        {
+            get
+            {
+                return _OAuthOptions;
+            }
+        }
 
-            //app.UseOAuthBearerTokens(OAuthOptions);
+        private void ConfigureAuth(IAppBuilder app)
+        {
+            app.UseOAuthAuthorizationServer(OAuthOptions);
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthBearerTokens(OAuthOptions);
         }
     }
 }

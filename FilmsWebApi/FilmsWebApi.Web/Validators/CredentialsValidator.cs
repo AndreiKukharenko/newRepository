@@ -9,8 +9,16 @@ namespace FilmsWebApi.Web.Validators
     {
         public static bool ValidateCredentials(string username, string password)
         {
-            if (username == "admin" && password == "admin1") return true;
-            else return false;
+            if (username == "admin" && password == "admin1")
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

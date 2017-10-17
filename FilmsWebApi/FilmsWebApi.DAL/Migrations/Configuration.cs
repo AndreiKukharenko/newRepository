@@ -1,10 +1,8 @@
+using FilmsWebApi.DAL.Models;
+using System.Data.Entity.Migrations;
+
 namespace FilmsWebApi.DAL.Migrations
 {
-    using Models;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<FilmsWebApi.DAL.Context.AppContext>
     {
@@ -15,11 +13,10 @@ namespace FilmsWebApi.DAL.Migrations
 
         protected override void Seed(FilmsWebApi.DAL.Context.AppContext context)
         {
-
-                context.Films.AddOrUpdate(
-                  new Film
+            context.Films.AddOrUpdate(
+                new Film
                 {
-                Id = 1,
+                    Id = 1,
                     Title = "first film",
                     Description = "description"
                 },

@@ -6,13 +6,14 @@ using FilmsWebApi.DAL.UnitOfwork;
 using FilmsWebApi.DAL.Models;
 using FilmsWebApi.BLL.Infrastructure;
 using FilmsWebApi.BLL.Services;
+using System.Web.Http;
 
 namespace FilmsWebApi.Web.App_Start
 {
     public static class DependenciesConfig
     {
         private static ContainerBuilder builder;
-        public static void RegisterDependencies()
+        public static void RegisterDependencies(HttpConfiguration config)
         {
             builder = new ContainerBuilder();
 

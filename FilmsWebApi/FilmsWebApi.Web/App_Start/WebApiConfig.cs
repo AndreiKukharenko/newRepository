@@ -20,5 +20,8 @@ namespace FilmsWebApi.Web
                 defaults: new { id = RouteParameter.Optional }
             );
         }
+
+        //TODO: allow CORS here
+
     }
 }
