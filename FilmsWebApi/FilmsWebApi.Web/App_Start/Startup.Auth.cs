@@ -35,7 +35,7 @@ namespace FilmsWebApi.Web
         {
             app.UseOAuthAuthorizationServer(OAuthOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-            app.UseOAuthBearerTokens(OAuthOptions);
+            //app.UseOAuthBearerTokens(OAuthOptions);
         }
     }
 }

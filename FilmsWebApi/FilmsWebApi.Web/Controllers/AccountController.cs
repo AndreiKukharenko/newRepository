@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
 using FilmsWebApi.Web.Models;
 
 namespace FilmsWebApi.Web.Controllers
 {
-    //[Authorize]
     public class AccountController : ApiController
     {
-
         public AccountController()
         {
         }

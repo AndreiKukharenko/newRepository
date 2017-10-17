@@ -12,7 +12,7 @@ using FilmsWebApi.BLL.DTO;
 
 namespace FilmsWebApi.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class FilmsController : ApiController
     {
         private AppContext db = new AppContext();
