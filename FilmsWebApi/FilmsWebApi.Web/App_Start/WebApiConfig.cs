@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Microsoft.Owin.Security.OAuth;
 
 namespace FilmsWebApi.Web
 {
@@ -9,7 +7,6 @@ namespace FilmsWebApi.Web
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -19,9 +16,14 @@ namespace FilmsWebApi.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //var cors = new EnableCorsAttribute("localhost:16629", "*", "*"); //can be useful
+            config.EnableCors();
+
+            //supress other authentication, prevents CSRF
+            config.SuppressDefaultHostAuthentication();
+            //adds token authentication
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
         }
-
-        //TODO: allow CORS here
-
     }
 }

@@ -16,6 +16,7 @@ namespace FilmsWebApi.Web.Providers
         {
         }
 
+        // this and other methods must be overridden
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
             context.Validated();
@@ -35,8 +36,14 @@ namespace FilmsWebApi.Web.Providers
                 context.SetError("username or password is incorrect");
                 return Task.FromResult<object>(null);
             }
+            List<Claim> claims = new List<Claim>();
 
-            ClaimsIdentity identity = new ClaimsIdentity();
+            claims.Add(new Claim(ClaimTypes.Name, username));
+
+            //ClaimsIdentity identity = new ClaimsIdentity(claims); //this code causes "Value cannot be null. 
+            //Parameter name: value" error while token is generating
+            // authentication type setting prevents this error
+            ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
 
             AuthenticationProperties authProperties = CreateAuthentificationProperties(username);
             var ticket = new AuthenticationTicket(identity, authProperties);
@@ -60,5 +67,19 @@ namespace FilmsWebApi.Web.Providers
             return new AuthenticationProperties(data);
         }
 
+        public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+        {
+            context.Validated();
+            return Task.FromResult<object>(null);
+        }
+
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
+            {
+                context.AdditionalResponseParameters.Add(property.Key, property.Value);
+            }
+            return Task.FromResult<object>(null);
+        }
     }
 }

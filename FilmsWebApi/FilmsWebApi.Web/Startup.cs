@@ -15,10 +15,9 @@ namespace FilmsWebApi.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            HttpConfiguration config = new HttpConfiguration();
-
-            WebApiConfig.Register(config);
             ConfigureAuth(app);
+            HttpConfiguration config = new HttpConfiguration();
+            WebApiConfig.Register(config);
             app.UseWebApi(config);
         }
     }
