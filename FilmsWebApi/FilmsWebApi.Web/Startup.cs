@@ -18,7 +18,6 @@ namespace FilmsWebApi.Web
             app.UseWebApi(config);
             WebApiConfig.Register(config);
             DependenciesConfig.RegisterDependencies(config);
-            config.DependencyResolver = new AutofacWebApiDependencyResolver(DependenciesConfig.Container);
 
             // the Autofac middleware itself will be added to the pipeline, after which 
             //any Microsoft.Owin.OwinMiddleware classes registered with the container will also be added to the pipeline

@@ -12,7 +12,7 @@ namespace FilmsWebApi.Web.Controllers
     [Authorize]
     public class FilmsController : ApiController
     {
-        private IFilmService _filmService;
+        private readonly IFilmService _filmService;
 
         public FilmsController(IFilmService filmService)
         {

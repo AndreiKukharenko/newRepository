@@ -12,13 +12,9 @@ namespace FilmsWebApi.Web.App_Start
 {
     public static class DependenciesConfig
     {
-        private static ContainerBuilder builder;
-
-        private static IContainer container;
-
         public static void RegisterDependencies(HttpConfiguration config)
         {
-            builder = new ContainerBuilder();
+            var builder = new ContainerBuilder();
         
             builder.RegisterType<AppContext>().AsSelf().WithParameter("connectionString", "Films").InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUoW>().InstancePerRequest();
@@ -31,16 +27,8 @@ namespace FilmsWebApi.Web.App_Start
             //register filter provider implementation
             builder.RegisterWebApiFilterProvider(config);
 
-            container = builder.Build();
+            var container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
-
-        public static IContainer Container
-        {
-            get
-            {
-                return container;
-            }
-        }
-
     }
 }

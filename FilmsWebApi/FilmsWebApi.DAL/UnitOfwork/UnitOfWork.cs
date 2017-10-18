@@ -7,7 +7,7 @@ namespace FilmsWebApi.DAL.UnitOfwork
 {
     public class UnitOfWork : IUoW
     {
-        private AppContext _appContext;
+        private readonly AppContext _appContext;
         private IGenericRepository<Film> _filmsRepo;
 
         public UnitOfWork(AppContext appContext)
