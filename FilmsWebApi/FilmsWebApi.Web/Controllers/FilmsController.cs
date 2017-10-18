@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using FilmsWebApi.DAL.Context;
@@ -15,19 +12,17 @@ namespace FilmsWebApi.Web.Controllers
     [Authorize]
     public class FilmsController : ApiController
     {
-        private AppContext db = new AppContext();
-
         private IFilmService _filmService;
 
-        public FilmsController()
+        public FilmsController(IFilmService filmService)
         {
-                
+            _filmService = filmService;
         }
         
         // GET: api/Films
-        public IEnumerable<Film> GetFilms()
+        public IEnumerable<FilmDTO> GetFilms()
         {
-            return db.Films.ToList();
+            return _filmService.GetAll();
         }
 
         // GET: api/Films/5

@@ -1,39 +1,44 @@
 ﻿using Autofac;
 using FilmsWebApi.DAL.Infrastructure;
-using FilmsWebApi.DAL.Repositories;
 using FilmsWebApi.DAL.Context;
 using FilmsWebApi.DAL.UnitOfwork;
-using FilmsWebApi.DAL.Models;
 using FilmsWebApi.BLL.Infrastructure;
 using FilmsWebApi.BLL.Services;
 using System.Web.Http;
+using Autofac.Integration.WebApi;
+using System.Reflection;
 
 namespace FilmsWebApi.Web.App_Start
 {
     public static class DependenciesConfig
     {
         private static ContainerBuilder builder;
+
+        private static IContainer container;
+
         public static void RegisterDependencies(HttpConfiguration config)
         {
             builder = new ContainerBuilder();
+        
+            builder.RegisterType<AppContext>().AsSelf().WithParameter("connectionString", "Films").InstancePerRequest();
+            builder.RegisterType<UnitOfWork>().As<IUoW>().InstancePerRequest();
+            builder.RegisterType<FilmService>().As<IFilmService>().InstancePerRequest();
 
-            // Can Register MVC controllers, model binders that require DI,
-            // web abstractions like HttpContextBase;
-            // Enable property injection in view pages. http://docs.autofac.org/en/latest/integration/mvc.html
+            // register controllers all at once using assembly scanning
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            //builder.RegisterType<FilmsController>().InstancePerRequest();  //register ApiController manually
 
-            // TODO: manage lifetime scope 
+            //register filter provider implementation
+            builder.RegisterWebApiFilterProvider(config);
 
-            builder.RegisterType<GenericRepository<Film>>().As<IGenericRepository<Film>>();
-            builder.RegisterType<UnitOfWork>().As<IUoW>();
-            builder.RegisterType<FilmService>().As<IFilmService>();
-
+            container = builder.Build();
         }
 
-        public static ContainerBuilder Builder
+        public static IContainer Container
         {
             get
             {
-                return builder;
+                return container;
             }
         }
 
